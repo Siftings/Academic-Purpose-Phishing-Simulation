@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Uniandes — Iniciar sesión</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="logo-header">
+        <div class="uni-name">Universidad de los Andes</div>
+        <div class="uni-sub">Portal Institucional</div>
+        <div class="logo-bar"></div>
+      </div>
+
+      <h2>Iniciar sesión</h2>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">Correo institucional</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="usuario@uniandes.edu.co"
+            autocomplete="email"
+            required
+          />
+          <span class="error-msg" id="emailError">Ingresa un correo válido.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          />
+          <span class="error-msg" id="passError">Ingresa tu contraseña.</span>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">Ingresar</button>
+      </form>
+
+      <div class="login-footer">
+        ¿Olvidaste tu contraseña? &nbsp;|&nbsp; Soporte TI
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000';
+    let clickSent = false;
+
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    async function logInteraction(email, type) {
+      try {
+        await fetch(`${API}/api/interactions`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, interactionType: type }),
+        });
+      } catch (_) {
+        // silent — lab environment may have backend not running
+      }
+    }
+
+    // Log "click" the first time the user focuses the email field
+    document.getElementById('email').addEventListener('focus', () => {
+      if (!clickSent) {
+        clickSent = true;
+        logInteraction('visitor@sim.lab', 'click');
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      let valid = true;
+
+      document.getElementById('emailError').style.display = 'none';
+      document.getElementById('passError').style.display = 'none';
+
+      if (!isValidEmail(email)) {
+        document.getElementById('emailError').style.display = 'block';
+        valid = false;
+      }
+
+      if (!password) {
+        document.getElementById('passError').style.display = 'block';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Ingresando...';
+
+      // If click wasn't sent yet (user skipped focus), send it now
+      if (!clickSent) {
+        clickSent = true;
+        await logInteraction(email, 'click');
+      }
+
+      const res = await fetch(`${API}/api/interactions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, interactionType: 'submit' }),
+      });
+      const data = res.ok ? await res.json() : null;
+
+      // Backend returns { redirectUrl: "/awareness" } — map to static file
+      const redirect = (data?.redirectUrl === '/awareness') ? 'awareness.html' : 'awareness.html';
+      window.location.href = redirect;
+    });
+  </script>
+</body>
+</html>

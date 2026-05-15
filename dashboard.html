@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Lab 08 Phishing Simulation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="dashboard-wrapper">
+
+    <div class="dashboard-header">
+      <h1>Dashboard de Simulación — Lab 08</h1>
+      <p>Universidad de los Andes · Ciberseguridad · Registro de interacciones</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="statTotal">—</div>
+        <div class="stat-label">Total interacciones</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statClicks">—</div>
+        <div class="stat-label">Clicks (visitas)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statSubmits">—</div>
+        <div class="stat-label">Formularios enviados</div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <h2>Registro de interacciones</h2>
+      <div id="tableContainer">
+        <div class="empty-state">Cargando datos...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000';
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleString('es-CO', { dateStyle: 'short', timeStyle: 'medium' });
+    }
+
+    function renderTable(logs) {
+      if (!logs || logs.length === 0) {
+        return '<div class="empty-state">No hay interacciones registradas aún.</div>';
+      }
+
+      const rows = logs.map(log => `
+        <tr>
+          <td>${log.email || '—'}</td>
+          <td>
+            <span class="badge badge-${log.interactionType}">
+              ${log.interactionType}
+            </span>
+          </td>
+          <td>${formatDate(log.timestamp)}</td>
+          <td>${log.ip || '—'}</td>
+          <td style="max-width:260px; font-size:0.78rem; color:#888;">${log.userAgent || '—'}</td>
+        </tr>
+      `).join('');
+
+      return `
+        <table>
+          <thead>
+            <tr>
+              <th>Correo</th>
+              <th>Tipo</th>
+              <th>Fecha / Hora</th>
+              <th>IP</th>
+              <th>User-Agent</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    async function loadDashboard() {
+      try {
+        const [statsRes, logsRes] = await Promise.all([
+          fetch(`${API}/api/interactions/stats`),
+          fetch(`${API}/api/interactions/logs`),
+        ]);
+
+        const stats = await statsRes.json();
+        const logs = await logsRes.json();
+
+        document.getElementById('statTotal').textContent = stats.totalInteractions ?? 0;
+        document.getElementById('statClicks').textContent = stats.totalClicks ?? 0;
+        document.getElementById('statSubmits').textContent = stats.totalSubmits ?? 0;
+
+        document.getElementById('tableContainer').innerHTML = renderTable(logs);
+      } catch (err) {
+        document.getElementById('statTotal').textContent = 'ERR';
+        document.getElementById('statClicks').textContent = 'ERR';
+        document.getElementById('statSubmits').textContent = 'ERR';
+        document.getElementById('tableContainer').innerHTML =
+          '<div class="empty-state">Error al conectar con el backend. Asegúrate de que el servidor esté corriendo en localhost:3000.</div>';
+      }
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+:root {
+  --blue: #1a3a5c;
+  --gold: #c8a951;
+  --light-bg: #f4f6f8;
+  --white: #ffffff;
+  --text: #222222;
+  --muted: #666666;
+  --red: #c0392b;
+  --green: #1e8449;
+  --amber: #e67e22;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--light-bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Login page ── */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.login-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.logo-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-header .uni-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+}
+
+.logo-header .uni-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.logo-bar {
+  width: 60px;
+  height: 4px;
+  background: var(--gold);
+  margin: 0.75rem auto 0;
+  border-radius: 2px;
+}
+
+.login-card h2 {
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+  color: var(--blue);
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #c8cdd2;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: var(--blue);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #14304f;
+}
+
+.login-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 1.5rem;
+}
+
+.error-msg {
+  color: var(--red);
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+
+/* ── Awareness page ── */
+.awareness-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.alert-banner {
+  background: var(--amber);
+  color: var(--white);
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert-banner .icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.alert-banner h1 {
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.alert-banner p {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.awareness-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.awareness-card h2 {
+  color: var(--blue);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.awareness-card p {
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 0.75rem;
+}
+
+.resource-list {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-list li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.resource-list li:last-child {
+  border-bottom: none;
+}
+
+.resource-list .tag {
+  font-size: 0.72rem;
+  background: var(--blue);
+  color: white;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-top: 0.15rem;
+}
+
+.resource-list a {
+  font-weight: 500;
+  color: var(--blue);
+  font-size: 0.95rem;
+}
+
+.resource-list .res-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: block;
+}
+
+.official-link-box {
+  background: var(--blue);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.official-link-box p {
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.official-link-box a {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* ── Dashboard ── */
+.dashboard-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.dashboard-header {
+  background: var(--blue);
+  color: var(--white);
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 1.3rem;
+}
+
+.dashboard-header p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 0.25rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat-card .stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.stat-card .stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.table-card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.table-card h2 {
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: var(--blue);
+  border-bottom: 1px solid #eee;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+thead {
+  background: var(--light-bg);
+}
+
+th, td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+td {
+  color: var(--text);
+  word-break: break-all;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-click {
+  background: #eaf4fb;
+  color: #1a6fa8;
+}
+
+.badge-submit {
+  background: #fef5e7;
+  color: #c87a00;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
