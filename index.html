@@ -6,13 +6,11 @@
   <title>Portal Uniandes — Iniciar sesión</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="login-page">
   <div class="login-wrapper">
     <div class="login-card">
       <div class="logo-header">
-        <div class="uni-name">Universidad de los Andes</div>
-        <div class="uni-sub">Portal Institucional</div>
-        <div class="logo-bar"></div>
+        <img class="uniandes-logo" src="assets/logo-uniandes.png" alt="Universidad de los Andes" />
       </div>
 
       <h2>Iniciar sesión</h2>
@@ -37,20 +35,35 @@
             type="password"
             id="password"
             name="password"
-            placeholder="••••••••"
+            placeholder="Contraseña"
             autocomplete="current-password"
             required
           />
           <span class="error-msg" id="passError">Ingresa tu contraseña.</span>
         </div>
 
-        <button type="submit" class="btn-primary" id="submitBtn">Ingresar</button>
+        <a class="forgot-link" href="#">He olvidado mi contraseña</a>
+
+        <div class="button-row">
+          <button type="submit" class="btn-primary" id="submitBtn">Iniciar sesión</button>
+        </div>
       </form>
 
       <div class="login-footer">
-        ¿Olvidaste tu contraseña? &nbsp;|&nbsp; Soporte TI
+        <a href="#">Gestionar mi Cuenta Uniandes</a>
+        <p>Recuerde que la DSIT nunca le solicitará suministrar su usuario y contraseña a través de un mensaje de correo electrónico.</p>
+        <p><a href="#">Al hacer uso de los recursos tecnológicos de la Universidad está aceptando las normas de uso de la cuenta Uniandes</a></p>
+        <p><a href="#">Directriz Institucional de Seguridad y Privacidad de la Información</a></p>
+        <p><a href="#">Universidad de los Andes</a> | Vigilada Mineducación</p>
+        <p>Esto es una prueba de phishing.</p>
       </div>
     </div>
+  </div>
+
+  <div class="legal-links" aria-hidden="true">
+    <span>Términos de uso</span>
+    <span>Privacidad y cookies</span>
+    <span>•••</span>
   </div>
 
   <script>
