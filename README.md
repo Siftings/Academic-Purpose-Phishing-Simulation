@@ -21,13 +21,6 @@ Demostrar de forma práctica y controlada el funcionamiento de un ataque de phis
 | `dashboard.html` | Panel de evidencias con estadísticas y logs de interacciones |
 | `styles.css` | Estilos compartidos entre todas las páginas |
 
-### Documentos adicionales
-
-| Archivo | Descripción |
-|---|---|
-| `correo_phishing.txt` | Plantilla del correo ficticio utilizado en la simulación |
-| `diseno_simulacion.txt` | Diseño completo: alcance, público objetivo, propósito pedagógico y flujo de redirección |
-
 ---
 
 ## Flujo de la simulación
